@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff Dashboard | Fresh Basket Malaysia</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f5f7f5;
+color:#333;
+}
+
+header{
+background:#0f8f4f;
+padding:15px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+color:white;
+font-size:28px;
+font-weight:bold;
+}
+
+.dashboard{
+padding:40px 8%;
+}
+
+.dashboard h1{
+color:#0f8f4f;
+margin-bottom:30px;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-bottom:40px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.card h3{
+margin-bottom:10px;
+color:#666;
+}
+
+.card .value{
+font-size:30px;
+font-weight:bold;
+color:#0f8f4f;
+}
+
+.inventory-section{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+margin-top:30px;
+overflow-x:auto;
+}
+
+.inventory-section h2{
+margin-bottom:20px;
+color:#0f8f4f;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+table th{
+background:#0f8f4f;
+color:white;
+padding:12px;
+}
+
+table td{
+padding:12px;
+border-bottom:1px solid #eee;
+text-align:center;
+}
+
+.update-btn{
+background:#0f8f4f;
+color:white;
+padding:8px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.update-btn:hover{
+background:#0c7440;
+}
+
+.warning{
+color:#dc3545;
+font-weight:bold;
+}
+
+.logout-btn{
+background:#dc3545;
+color:white;
+padding:10px 20px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+footer{
+background:#0f8f4f;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<i class="fa-solid fa-boxes-stacked"></i>
+Staff Dashboard
+</div>
+
+<button class="logout-btn" onclick="logoutStaff()">
+Logout
+</button>
+
+</header>
+
+<div class="dashboard">
+
+<h1>Inventory Management Dashboard</h1>
+
+<div class="stats-grid">
+
+<div class="card">
+<h3>Total Inventory Items</h3>
+<div class="value">48</div>
+</div>
+
+<div class="card">
+<h3>Low Stock Products</h3>
+<div class="value">4</div>
+</div>
+
+<div class="card">
+<h3>Stock Updates Today</h3>
+<div class="value">12</div>
+</div>
+
+<div class="card">
+<h3>Inventory Health</h3>
+<div class="value">92%</div>
+</div>
+
+</div>
+
+<div class="inventory-section">
+
+<h2>Product Inventory</h2>
+
+<table>
+
+<tr>
+<th>Product</th>
+<th>Stock Level</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+<tr>
+<td>Fresh Apples</td>
+<td>120</td>
+<td>Good</td>
+<td>
+<button class="update-btn" onclick="updateStock(this)">
+Update Stock
+</button>
+</td>
+</tr>
+
+<tr>
+<td>Fresh Bananas</td>
+<td>95</td>
+<td>Good</td>
+<td><button class="update-btn" onclick="updateStock(this)">
+Update Stock
+</button></td>
+</tr>
+
+<tr>
+<td>Fresh Milk</td>
+<td>18</td>
+<td class="warning">Low Stock</td>
+<td><button class="update-btn" onclick="updateStock(this)">
+Update Stock
+</button></td>
+</tr>
+
+<tr>
+<td>Orange Juice</td>
+<td>22</td>
+<td>Good</td>
+<td><button class="update-btn" onclick="updateStock(this)">
+Update Stock
+</button></td>
+</tr>
+
+<tr>
+<td>Tomatoes</td>
+<td>14</td>
+<td class="warning">Low Stock</td>
+<td><button class="update-btn" onclick="updateStock(this)">
+Update Stock
+</button></td>
+</tr>
+
+<tr>
+<td>Broccoli</td>
+<td>30</td>
+<td>Good</td>
+<td><button class="update-btn" onclick="updateStock(this)">
+Update Stock
+</button></td>
+</tr>
+
+<tr>
+<td>White Bread</td>
+<td>12</td>
+<td class="warning">Low Stock</td>
+<td><button class="update-btn" onclick="updateStock(this)">
+Update Stock
+</button></td>
+</tr>
+
+<tr>
+<td>Chicken Breast</td>
+<td>9</td>
+<td class="warning">Low Stock</td>
+<td><button class="update-btn" onclick="updateStock(this)">
+Update Stock
+</button></td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Fresh Basket Malaysia. Staff Dashboard
+</footer>
+
+<script>
+
+if(localStorage.getItem("staffLoggedIn") !== "true"){
+window.location.href="staff-login.html";
+}
+
+function logoutStaff(){
+
+localStorage.removeItem("staffLoggedIn");
+
+window.location.href="staff-login.html";
+
+}
+function updateStock(button){
+
+const row = button.parentElement.parentElement;
+
+const stockCell = row.cells[1];
+const statusCell = row.cells[2];
+
+let currentStock = parseInt(stockCell.innerText);
+
+currentStock += 10;
+
+stockCell.innerText = currentStock;
+
+if(currentStock > 20){
+statusCell.innerHTML = "Good";
+statusCell.classList.remove("warning");
+}
+
+alert("Stock Updated Successfully");
+
+}
+</script>
+
+</body>
+</html>

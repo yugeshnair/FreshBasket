@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff Login | Fresh Basket Malaysia</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f5f7f5;
+}
+
+header{
+background:#0f8f4f;
+padding:15px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+color:white;
+font-size:28px;
+font-weight:bold;
+}
+
+.logo i{
+margin-right:8px;
+}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:25px;
+}
+
+nav a{
+text-decoration:none;
+color:white;
+font-weight:600;
+}
+
+.login-container{
+min-height:80vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:40px 20px;
+}
+
+.login-card{
+background:white;
+width:100%;
+max-width:450px;
+padding:40px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.login-card h1{
+text-align:center;
+color:#0f8f4f;
+margin-bottom:10px;
+}
+
+.login-card p{
+text-align:center;
+color:#666;
+margin-bottom:25px;
+}
+
+.form-group{
+margin-bottom:20px;
+}
+
+.form-group label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+}
+
+.form-group input{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+.login-btn{
+width:100%;
+padding:14px;
+border:none;
+background:#0f8f4f;
+color:white;
+font-size:16px;
+font-weight:bold;
+border-radius:8px;
+cursor:pointer;
+}
+
+.login-btn:hover{
+background:#0c7440;
+}
+
+.error{
+margin-top:15px;
+text-align:center;
+color:red;
+font-weight:bold;
+}
+
+footer{
+background:#0f8f4f;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<i class="fa-solid fa-basket-shopping"></i>
+Fresh Basket
+</div>
+
+<nav>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="cart.html">Cart</a></li>
+</ul>
+</nav>
+
+</header>
+
+<div class="login-container">
+
+<div class="login-card">
+
+<h1>Staff Login</h1>
+
+<p>Inventory & Operations Staff Access</p>
+
+<div class="form-group">
+<label>Username</label>
+<input type="text" id="username" placeholder="Enter Username">
+</div>
+
+<div class="form-group">
+<label>Password</label>
+<input type="password" id="password" placeholder="Enter Password">
+</div>
+
+<button class="login-btn" onclick="staffLogin()">
+Login
+</button>
+
+<p class="error" id="errorMsg"></p>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Fresh Basket Malaysia. All Rights Reserved.
+</footer>
+
+<script>
+
+function staffLogin(){
+
+const username =
+document.getElementById("username").value.trim();
+
+const password =
+document.getElementById("password").value.trim();
+
+if(username === "staff" && password === "staff123"){
+
+localStorage.setItem("staffLoggedIn","true");
+
+window.location.href="staff.html";
+
+}else{
+
+document.getElementById("errorMsg").innerText =
+"Invalid Staff Credentials";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

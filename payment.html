@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment | Fresh Basket Malaysia</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f5f7f5;
+color:#333;
+}
+
+header{
+background:#0f8f4f;
+padding:15px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+color:white;
+font-size:28px;
+font-weight:bold;
+}
+
+.logo i{
+margin-right:8px;
+}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:25px;
+}
+
+nav a{
+text-decoration:none;
+color:white;
+font-weight:600;
+}
+
+.page-title{
+text-align:center;
+padding:40px 20px;
+}
+
+.page-title h1{
+color:#0f8f4f;
+font-size:42px;
+}
+
+.payment-container{
+width:90%;
+max-width:1000px;
+margin:auto;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+padding-bottom:50px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.card h2{
+margin-bottom:20px;
+color:#0f8f4f;
+}
+
+.input-group{
+margin-bottom:15px;
+}
+
+.input-group label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+textarea{
+resize:none;
+height:100px;
+}
+
+.total{
+font-size:30px;
+font-weight:bold;
+color:#0f8f4f;
+margin:15px 0;
+}
+
+.pay-btn{
+width:100%;
+padding:14px;
+border:none;
+background:#0f8f4f;
+color:white;
+font-size:16px;
+font-weight:bold;
+border-radius:10px;
+cursor:pointer;
+}
+
+.pay-btn:hover{
+background:#0c7440;
+}
+
+.success-box{
+display:none;
+margin-top:20px;
+padding:15px;
+background:#d4edda;
+color:#155724;
+border-radius:10px;
+font-weight:bold;
+}
+
+footer{
+background:#0f8f4f;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+@media(max-width:768px){
+
+.payment-container{
+grid-template-columns:1fr;
+}
+
+.page-title h1{
+font-size:30px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<i class="fa-solid fa-basket-shopping"></i>
+Fresh Basket
+</div>
+
+<nav>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="cart.html">Cart</a></li>
+</ul>
+</nav>
+
+</header>
+
+<section class="page-title">
+<h1>Secure Payment</h1>
+</section>
+
+<div class="payment-container">
+
+<div class="card">
+
+<h2>Customer Details</h2>
+
+<div class="input-group">
+<label>Full Name</label>
+<input type="text" id="customerName">
+</div>
+
+<div class="input-group">
+<label>Email</label>
+<input type="email" id="customerEmail">
+</div>
+
+<div class="input-group">
+<label>Delivery Address</label>
+<textarea id="address"></textarea>
+</div>
+
+<div class="input-group">
+<label>Payment Method</label>
+<select id="paymentMethod">
+<option>Credit / Debit Card</option>
+<option>Online Banking</option>
+<option>Touch 'n Go eWallet</option>
+</select>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Order Summary</h2>
+
+<p>Total Amount:</p>
+
+<div class="total" id="totalAmount">
+RM 0.00
+</div>
+
+<button class="pay-btn" onclick="processPayment()">
+Pay Now
+</button>
+
+<div class="success-box" id="successBox"></div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Fresh Basket Malaysia. All Rights Reserved.
+</footer>
+
+<script>
+
+document.getElementById("customerName").value =
+localStorage.getItem("customerName") || "";
+
+document.getElementById("customerEmail").value =
+localStorage.getItem("customerEmail") || "";
+
+let cart =
+JSON.parse(localStorage.getItem("cart")) || [];
+
+let total = 0;
+
+cart = cart.map(item => ({
+name: item.name,
+price: Number(item.price) || 0,
+quantity: Number(item.quantity) || 1
+}));
+
+cart.forEach(item => {
+
+total += item.price * item.quantity;
+
+});
+
+document.getElementById("totalAmount").innerText =
+"RM " + total.toFixed(2);
+
+function processPayment(){
+
+if(cart.length === 0 || total <= 0){
+
+alert("Your cart is empty. Please add products before payment.");
+
+window.location.href = "products.html";
+
+return;
+
+}
+
+const address =
+document.getElementById("address").value.trim();
+
+if(address === ""){
+
+alert("Please enter delivery address.");
+
+return;
+
+}
+
+const orderNumber =
+"FB" + Math.floor(Math.random()*900000 + 100000);
+
+localStorage.setItem(
+"orderNumber",
+orderNumber
+);
+
+localStorage.setItem(
+"orderStatus",
+"Processing"
+);
+
+document.getElementById("successBox").style.display =
+"block";
+
+document.getElementById("successBox").innerHTML =
+`
+Payment Successful!<br><br>
+Order Number: <b>${orderNumber}</b>
+`;
+
+setTimeout(()=>{
+
+window.location.href =
+"tracking.html";
+
+},2000);
+
+}
+
+</script>
+
+</body>
+</html>

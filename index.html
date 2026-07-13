@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fresh Basket Malaysia</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f5f7f5;
+color:#333;
+}
+
+header{
+background:#0f8f4f;
+padding:15px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+color:white;
+font-size:28px;
+font-weight:bold;
+}
+
+.logo i{
+margin-right:8px;
+}
+
+nav ul{
+list-style:none;
+display:flex;
+align-items:center;
+gap:25px;
+}
+
+nav a{
+text-decoration:none;
+color:white;
+font-weight:600;
+transition:.3s;
+}
+
+nav a:hover{
+color:#d4ffd4;
+}
+
+.profile-menu{
+position:relative;
+display:none;
+}
+
+.profile-btn{
+cursor:pointer;
+color:white;
+font-weight:bold;
+}
+
+.dropdown{
+position:absolute;
+right:0;
+top:35px;
+background:white;
+min-width:180px;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+display:none;
+}
+
+.dropdown a{
+display:block;
+padding:12px;
+color:#333;
+text-decoration:none;
+}
+
+.dropdown a:hover{
+background:#f1f1f1;
+}
+
+.hero{
+height:85vh;
+background:
+linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),
+url('https://images.unsplash.com/photo-1542838132-92c53300491e');
+background-size:cover;
+background-position:center;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+.hero-content{
+color:white;
+max-width:800px;
+}
+
+.hero h1{
+font-size:55px;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:20px;
+margin-bottom:30px;
+line-height:1.6;
+}
+
+.hero-btn{
+display:inline-block;
+padding:15px 35px;
+background:#0f8f4f;
+color:white;
+text-decoration:none;
+border-radius:50px;
+font-weight:bold;
+transition:.3s;
+}
+
+.hero-btn:hover{
+background:#0c7440;
+}
+
+.section{
+padding:80px 8%;
+}
+
+.section-title{
+text-align:center;
+font-size:38px;
+color:#0f8f4f;
+margin-bottom:50px;
+}
+
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.feature-card{
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+text-align:center;
+}
+
+.feature-card i{
+font-size:45px;
+color:#0f8f4f;
+margin-bottom:20px;
+}
+
+.feature-card h3{
+margin-bottom:10px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.stat-card{
+background:white;
+padding:30px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.stat-card h2{
+color:#0f8f4f;
+font-size:38px;
+margin-bottom:10px;
+}
+
+footer{
+background:#0f8f4f;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:50px;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.6);
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.modal-content{
+background:white;
+padding:30px;
+width:90%;
+max-width:500px;
+border-radius:15px;
+}
+
+.modal-content h2{
+margin-bottom:20px;
+color:#0f8f4f;
+}
+
+.modal-content input{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+.modal-content button{
+width:100%;
+padding:12px;
+border:none;
+background:#0f8f4f;
+color:white;
+border-radius:8px;
+cursor:pointer;
+}
+
+.close{
+float:right;
+font-size:24px;
+cursor:pointer;
+}
+
+.success{
+color:green;
+margin-top:10px;
+}
+
+@media(max-width:768px){
+
+nav ul{
+gap:12px;
+font-size:14px;
+}
+
+.hero h1{
+font-size:35px;
+}
+
+.hero p{
+font-size:16px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<i class="fa-solid fa-basket-shopping"></i>
+Fresh Basket
+</div>
+
+<nav>
+<ul>
+
+<li><a href="index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="cart.html">Cart</a></li>
+
+<li id="loginNav">
+<a href="login.html">Login</a>
+</li>
+
+<li id="adminNav">
+<a href="admin-login.html">Admin Login</a>
+</li>
+
+<li id="staffNav">
+<a href="staff-login.html">Staff Login</a>
+</li>
+
+<li class="profile-menu" id="profileMenu">
+
+<div class="profile-btn" onclick="toggleDropdown()" id="customerName">
+Customer
+</div>
+
+<div class="dropdown" id="dropdown">
+
+<a href="#" onclick="openProfile()">Profile</a>
+
+<a href="#" onclick="openPassword()">Change Password</a>
+
+<a href="#" onclick="logout()">Logout</a>
+
+</div>
+
+</li>
+
+</ul>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>Fresh Groceries Delivered To Your Door</h1>
+
+<p>
+Fresh Basket Malaysia provides quality fruits,
+vegetables, beverages and household essentials
+with fast delivery and affordable prices.
+</p>
+
+<a href="products.html" class="hero-btn">
+Shop Now
+</a>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<h2 class="section-title">Why Shop With Us?</h2>
+
+<div class="features">
+
+<div class="feature-card">
+<i class="fa-solid fa-leaf"></i>
+<h3>Fresh Produce</h3>
+<p>Premium quality fruits and vegetables sourced daily.</p>
+</div>
+
+<div class="feature-card">
+<i class="fa-solid fa-truck"></i>
+<h3>Fast Delivery</h3>
+<p>Quick and reliable delivery across Malaysia.</p>
+</div>
+
+<div class="feature-card">
+<i class="fa-solid fa-tags"></i>
+<h3>Best Prices</h3>
+<p>Affordable grocery prices with regular promotions.</p>
+</div>
+
+<div class="feature-card">
+<i class="fa-solid fa-shield"></i>
+<h3>Secure Shopping</h3>
+<p>Safe payments and trusted customer service.</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<h2 class="section-title">Fresh Basket Statistics</h2>
+
+<div class="stats">
+
+<div class="stat-card">
+<h2>10K+</h2>
+<p>Customers</p>
+</div>
+
+<div class="stat-card">
+<h2>500+</h2>
+<p>Products</p>
+</div>
+
+<div class="stat-card">
+<h2>95%</h2>
+<p>Customer Satisfaction</p>
+</div>
+
+<div class="stat-card">
+<h2>24/7</h2>
+<p>Support</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 Fresh Basket Malaysia. All Rights Reserved.
+</footer>
+
+<!-- PROFILE MODAL -->
+
+<div class="modal" id="profileModal">
+
+<div class="modal-content">
+
+<span class="close" onclick="closeProfile()">&times;</span>
+
+<h2>Customer Profile</h2>
+
+<p><strong>Name:</strong> <span id="profileName"></span></p>
+
+<br>
+
+<p><strong>Email:</strong> <span id="profileEmail"></span></p>
+
+<br>
+
+<button onclick="alert('Profile editing enabled in local storage.')">
+Edit Profile
+</button>
+
+</div>
+
+</div>
+
+<!-- PASSWORD MODAL -->
+
+<div class="modal" id="passwordModal">
+
+<div class="modal-content">
+
+<span class="close" onclick="closePassword()">&times;</span>
+
+<h2>Change Password</h2>
+
+<input type="password" id="newPassword" placeholder="New Password">
+
+<button onclick="changePassword()">
+Save Password
+</button>
+
+<p class="success" id="passwordMsg"></p>
+
+</div>
+
+</div>
+
+<script>
+
+function toggleDropdown(){
+document.getElementById("dropdown").style.display=
+document.getElementById("dropdown").style.display==="block"
+? "none":"block";
+}
+
+const customerName=localStorage.getItem("customerName");
+const customerEmail=localStorage.getItem("customerEmail");
+
+if(customerName){
+
+document.getElementById("loginNav").style.display="none";
+
+document.getElementById("adminNav").style.display="none";
+
+document.getElementById("staffNav").style.display="none";
+
+document.getElementById("profileMenu").style.display="block";
+
+document.getElementById("customerName").innerText=customerName;
+
+}
+
+function openProfile(){
+
+document.getElementById("profileName").innerText=
+localStorage.getItem("customerName") || "";
+
+document.getElementById("profileEmail").innerText=
+localStorage.getItem("customerEmail") || "";
+
+document.getElementById("profileModal").style.display="flex";
+
+}
+
+function closeProfile(){
+document.getElementById("profileModal").style.display="none";
+}
+
+function openPassword(){
+document.getElementById("passwordModal").style.display="flex";
+}
+
+function closePassword(){
+document.getElementById("passwordModal").style.display="none";
+}
+
+function changePassword(){
+
+const password=
+document.getElementById("newPassword").value;
+
+localStorage.setItem("customerPassword",password);
+
+document.getElementById("passwordMsg").innerText=
+"Password updated successfully.";
+
+}
+
+function logout(){
+
+localStorage.removeItem("customerName");
+localStorage.removeItem("customerEmail");
+
+window.location.href="index.html";
+
+}
+
+window.onclick=function(event){
+
+const profile=
+document.getElementById("profileModal");
+
+const password=
+document.getElementById("passwordModal");
+
+if(event.target===profile){
+profile.style.display="none";
+}
+
+if(event.target===password){
+password.style.display="none";
+}
+
+}
+
+</script>
+
+</body>
+</html>

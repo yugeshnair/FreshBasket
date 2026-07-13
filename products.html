@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products | Fresh Basket Malaysia</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f5f7f5;
+color:#333;
+}
+
+header{
+background:#0f8f4f;
+padding:15px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+color:white;
+font-size:28px;
+font-weight:bold;
+}
+
+.logo i{
+margin-right:8px;
+}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:25px;
+align-items:center;
+}
+
+nav a{
+text-decoration:none;
+color:white;
+font-weight:600;
+transition:.3s;
+}
+
+nav a:hover{
+color:#d4ffd4;
+}
+
+.profile-menu{
+position:relative;
+display:none;
+}
+
+.profile-btn{
+color:white;
+cursor:pointer;
+font-weight:bold;
+}
+
+.dropdown{
+display:none;
+position:absolute;
+right:0;
+top:35px;
+background:white;
+border-radius:10px;
+overflow:hidden;
+min-width:180px;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.dropdown a{
+display:block;
+padding:12px;
+color:#333;
+text-decoration:none;
+}
+
+.dropdown a:hover{
+background:#f1f1f1;
+}
+
+.page-title{
+padding:60px 8% 30px;
+text-align:center;
+}
+
+.page-title h1{
+font-size:42px;
+color:#0f8f4f;
+}
+
+.page-title p{
+margin-top:10px;
+color:#666;
+}
+
+.products{
+padding:30px 8% 80px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.product-card{
+background:white;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.product-card:hover{
+transform:translateY(-5px);
+}
+
+.product-card img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.product-info{
+padding:20px;
+}
+
+.product-info h3{
+margin-bottom:10px;
+}
+
+.price{
+font-size:20px;
+font-weight:bold;
+color:#0f8f4f;
+margin-bottom:15px;
+}
+
+.product-info button{
+width:100%;
+padding:12px;
+border:none;
+background:#0f8f4f;
+color:white;
+font-weight:bold;
+border-radius:8px;
+cursor:pointer;
+}
+
+.product-info button:hover{
+background:#0c7440;
+}
+
+footer{
+background:#0f8f4f;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.6);
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.modal-content{
+background:white;
+padding:30px;
+width:90%;
+max-width:500px;
+border-radius:15px;
+}
+
+.modal-content h2{
+margin-bottom:20px;
+color:#0f8f4f;
+}
+
+.modal-content input{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+.modal-content button{
+width:100%;
+padding:12px;
+border:none;
+background:#0f8f4f;
+color:white;
+border-radius:8px;
+cursor:pointer;
+}
+
+.close{
+float:right;
+font-size:24px;
+cursor:pointer;
+}
+
+.success{
+margin-top:10px;
+color:green;
+}
+
+@media(max-width:768px){
+
+nav ul{
+gap:12px;
+font-size:14px;
+}
+
+.page-title h1{
+font-size:30px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<i class="fa-solid fa-basket-shopping"></i>
+Fresh Basket
+</div>
+
+<nav>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="cart.html">Cart</a></li>
+
+<li id="loginNav">
+<a href="login.html">Login</a>
+</li>
+
+<li id="adminNav">
+<a href="admin-login.html">Admin Login</a>
+</li>
+
+<li id="staffNav">
+<a href="staff-login.html">Staff Login</a>
+</li>
+
+<li class="profile-menu" id="profileMenu">
+
+<div class="profile-btn" onclick="toggleDropdown()" id="customerName">
+Customer
+</div>
+
+<div class="dropdown" id="dropdown">
+
+<a href="#" onclick="openProfile()">Profile</a>
+
+<a href="#" onclick="openPassword()">Change Password</a>
+
+<a href="#" onclick="logout()">Logout</a>
+
+</div>
+
+</li>
+
+</ul>
+
+</nav>
+
+</header>
+
+<section class="page-title">
+
+<h1>Fresh Grocery Products</h1>
+
+<p>Choose from our quality groceries and daily essentials.</p>
+
+</section>
+
+<section class="products">
+
+<div class="product-card">
+<img src="https://images.pexels.com/photos/102104/pexels-photo-102104.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Apples">
+<div class="product-info">
+<h3>Fresh Apples</h3>
+<div class="price">RM 8.90</div>
+<button onclick="addToCart('Fresh Apples',8.90,'https://images.pexels.com/photos/102104/pexels-photo-102104.jpeg?auto=compress&cs=tinysrgb&w=600')">Add To Cart</button>
+</div>
+</div>
+
+<div class="product-card">
+<img src="https://images.pexels.com/photos/1093038/pexels-photo-1093038.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bananas">
+<div class="product-info">
+<h3>Fresh Bananas</h3>
+<div class="price">RM 6.50</div>
+<button onclick="addToCart('Fresh Bananas',6.50,'https://images.pexels.com/photos/1093038/pexels-photo-1093038.jpeg?auto=compress&cs=tinysrgb&w=600')">Add To Cart</button>
+</div>
+</div>
+
+<div class="product-card">
+<img src="https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Milk">
+<div class="product-info">
+<h3>Fresh Milk</h3>
+<div class="price">RM 9.90</div>
+<button onclick="addToCart('Fresh Milk',9.90,'https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&w=600')">Add To Cart</button>
+</div>
+</div>
+
+<div class="product-card">
+<img src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Orange Juice">
+<div class="product-info">
+<h3>Orange Juice</h3>
+<div class="price">RM 12.90</div>
+<button onclick="addToCart('Orange Juice',12.90,'https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg?auto=compress&cs=tinysrgb&w=600')">Add To Cart</button>
+</div>
+</div>
+
+<div class="product-card">
+<img src="https://images.pexels.com/photos/533280/pexels-photo-533280.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tomatoes">
+<div class="product-info">
+<h3>Tomatoes</h3>
+<div class="price">RM 5.90</div>
+<button onclick="addToCart('Tomatoes',5.90,'https://images.pexels.com/photos/533280/pexels-photo-533280.jpeg?auto=compress&cs=tinysrgb&w=600')">Add To Cart</button>
+</div>
+</div>
+
+<div class="product-card">
+<img src="https://images.pexels.com/photos/47347/broccoli-vegetable-food-healthy-47347.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Broccoli">
+<div class="product-info">
+<h3>Broccoli</h3>
+<div class="price">RM 7.50</div>
+<button onclick="addToCart('Broccoli',7.50,'https://images.pexels.com/photos/47347/broccoli-vegetable-food-healthy-47347.jpeg?auto=compress&cs=tinysrgb&w=600')">Add To Cart</button>
+</div>
+</div>
+
+<div class="product-card">
+<img src="https://images.pexels.com/photos/209206/pexels-photo-209206.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bread">
+<div class="product-info">
+<h3>White Bread</h3>
+<div class="price">RM 4.90</div>
+<button onclick="addToCart('White Bread',4.90,'https://images.pexels.com/photos/209206/pexels-photo-209206.jpeg?auto=compress&cs=tinysrgb&w=600')">Add To Cart</button>
+</div>
+</div>
+
+<div class="product-card">
+<img src="https://images.pexels.com/photos/616354/pexels-photo-616354.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Chicken Breast">
+<div class="product-info">
+<h3>Chicken Breast</h3>
+<div class="price">RM 18.90</div>
+<button onclick="addToCart('Chicken Breast',18.90,'https://images.pexels.com/photos/616354/pexels-photo-616354.jpeg?auto=compress&cs=tinysrgb&w=600')">Add To Cart</button>
+</div>
+</div>
+
+</section>
+
+<footer>
+© 2026 Fresh Basket Malaysia. All Rights Reserved.
+</footer>
+
+<div class="modal" id="profileModal">
+<div class="modal-content">
+<span class="close" onclick="closeProfile()">&times;</span>
+<h2>Customer Profile</h2>
+<p><strong>Name:</strong> <span id="profileName"></span></p>
+<br>
+<p><strong>Email:</strong> <span id="profileEmail"></span></p>
+<br>
+<button>Edit Profile</button>
+</div>
+</div>
+
+<div class="modal" id="passwordModal">
+<div class="modal-content">
+<span class="close" onclick="closePassword()">&times;</span>
+<h2>Change Password</h2>
+<input type="password" id="newPassword" placeholder="New Password">
+<button onclick="changePassword()">Save Password</button>
+<p class="success" id="passwordMsg"></p>
+</div>
+</div>
+
+<script>
+
+function addToCart(name,price,image){
+
+let cart=JSON.parse(localStorage.getItem("cart")) || [];
+
+let existing=cart.find(item=>item.name===name);
+
+if(existing){
+existing.quantity++;
+}
+else{
+cart.push({
+name:name,
+price:price,
+image:image,
+quantity:1
+});
+}
+
+localStorage.setItem("cart",JSON.stringify(cart));
+
+alert(name + " added to cart!");
+
+}
+
+const customerName=localStorage.getItem("customerName");
+
+if(customerName){
+
+document.getElementById("loginNav").style.display="none";
+document.getElementById("adminNav").style.display="none";
+document.getElementById("staffNav").style.display="none";
+
+document.getElementById("profileMenu").style.display="block";
+
+document.getElementById("customerName").innerText=customerName;
+
+}
+
+function toggleDropdown(){
+
+document.getElementById("dropdown").style.display=
+document.getElementById("dropdown").style.display==="block"
+? "none"
+: "block";
+
+}
+
+function openProfile(){
+
+document.getElementById("profileName").innerText=
+localStorage.getItem("customerName");
+
+document.getElementById("profileEmail").innerText=
+localStorage.getItem("customerEmail");
+
+document.getElementById("profileModal").style.display="flex";
+
+}
+
+function closeProfile(){
+document.getElementById("profileModal").style.display="none";
+}
+
+function openPassword(){
+document.getElementById("passwordModal").style.display="flex";
+}
+
+function closePassword(){
+document.getElementById("passwordModal").style.display="none";
+}
+
+function changePassword(){
+
+localStorage.setItem(
+"customerPassword",
+document.getElementById("newPassword").value
+);
+
+document.getElementById("passwordMsg").innerText=
+"Password updated successfully.";
+
+}
+
+function logout(){
+
+localStorage.removeItem("customerName");
+localStorage.removeItem("customerEmail");
+
+window.location.href="index.html";
+
+}
+
+</script>
+
+</body>
+</html>

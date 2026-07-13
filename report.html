@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales Report | Fresh Basket Malaysia</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f5f7f5;
+color:#333;
+}
+
+header{
+background:#0f8f4f;
+padding:15px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+color:white;
+font-size:28px;
+font-weight:bold;
+}
+
+.logo i{
+margin-right:8px;
+}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:25px;
+align-items:center;
+}
+
+nav a{
+text-decoration:none;
+color:white;
+font-weight:600;
+transition:.3s;
+}
+
+nav a:hover{
+color:#d4ffd4;
+}
+
+.report-container{
+width:90%;
+max-width:1200px;
+margin:40px auto;
+}
+
+.page-title{
+text-align:center;
+margin-bottom:40px;
+}
+
+.page-title h1{
+font-size:42px;
+color:#0f8f4f;
+margin-bottom:10px;
+}
+
+.page-title p{
+color:#666;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.card h3{
+color:#666;
+margin-bottom:10px;
+}
+
+.value{
+font-size:32px;
+font-weight:bold;
+color:#0f8f4f;
+}
+
+.report-table{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+overflow-x:auto;
+}
+
+.report-table h2{
+margin-bottom:20px;
+color:#0f8f4f;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+table th{
+background:#0f8f4f;
+color:white;
+padding:12px;
+}
+
+table td{
+padding:12px;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+
+footer{
+background:#0f8f4f;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+gap:15px;
+}
+
+nav ul{
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.page-title h1{
+font-size:30px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<i class="fa-solid fa-chart-line"></i>
+Fresh Basket Reports
+</div>
+
+<nav>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="cart.html">Cart</a></li>
+<li><a href="admin.html">Admin Dashboard</a></li>
+</ul>
+</nav>
+
+</header>
+
+<div class="report-container">
+
+<div class="page-title">
+<h1>Sales Report Dashboard</h1>
+<p>Fresh Basket Malaysia Business Performance Report</p>
+</div>
+
+<div class="stats-grid">
+
+<div class="card">
+<h3>Total Revenue</h3>
+<div class="value">RM 12,450</div>
+</div>
+
+<div class="card">
+<h3>Total Orders</h3>
+<div class="value">156</div>
+</div>
+
+<div class="card">
+<h3>Active Customers</h3>
+<div class="value">89</div>
+</div>
+
+<div class="card">
+<h3>Total Products</h3>
+<div class="value">48</div>
+</div>
+
+</div>
+
+<div class="report-table">
+
+<h2>Monthly Sales Summary</h2>
+
+<table>
+
+<tr>
+<th>Month</th>
+<th>Orders</th>
+<th>Revenue</th>
+</tr>
+
+<tr>
+<td>January</td>
+<td>20</td>
+<td>RM 1,520</td>
+</tr>
+
+<tr>
+<td>February</td>
+<td>24</td>
+<td>RM 1,860</td>
+</tr>
+
+<tr>
+<td>March</td>
+<td>28</td>
+<td>RM 2,130</td>
+</tr>
+
+<tr>
+<td>April</td>
+<td>30</td>
+<td>RM 2,420</td>
+</tr>
+
+<tr>
+<td>May</td>
+<td>26</td>
+<td>RM 2,050</td>
+</tr>
+
+<tr>
+<td>June</td>
+<td>28</td>
+<td>RM 2,470</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Fresh Basket Malaysia. Sales Report System
+</footer>
+
+</body>
+</html>

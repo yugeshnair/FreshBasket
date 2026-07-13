@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Tracking | Fresh Basket Malaysia</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f5f7f5;
+color:#333;
+}
+
+header{
+background:#0f8f4f;
+padding:15px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+color:white;
+font-size:28px;
+font-weight:bold;
+}
+
+.logo i{
+margin-right:8px;
+}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:25px;
+}
+
+nav a{
+text-decoration:none;
+color:white;
+font-weight:600;
+}
+
+.page-title{
+text-align:center;
+padding:40px 20px;
+}
+
+.page-title h1{
+font-size:42px;
+color:#0f8f4f;
+}
+
+.tracking-container{
+width:90%;
+max-width:900px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+margin-bottom:50px;
+}
+
+.order-info{
+margin-bottom:30px;
+}
+
+.order-info h2{
+color:#0f8f4f;
+margin-bottom:10px;
+}
+
+.progress-bar{
+width:100%;
+height:15px;
+background:#ddd;
+border-radius:20px;
+overflow:hidden;
+margin:20px 0;
+}
+
+.progress{
+width:50%;
+height:100%;
+background:#0f8f4f;
+}
+
+.timeline{
+margin-top:30px;
+}
+
+.step{
+display:flex;
+align-items:center;
+margin-bottom:20px;
+font-size:18px;
+}
+
+.complete{
+color:#0f8f4f;
+font-weight:bold;
+}
+
+.current{
+color:#ff9800;
+font-weight:bold;
+}
+
+.pending{
+color:#999;
+}
+
+.step i{
+margin-right:15px;
+font-size:20px;
+}
+
+footer{
+background:#0f8f4f;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+@media(max-width:768px){
+
+.page-title h1{
+font-size:30px;
+}
+
+.step{
+font-size:16px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<i class="fa-solid fa-basket-shopping"></i>
+Fresh Basket
+</div>
+
+<nav>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="cart.html">Cart</a></li>
+</ul>
+</nav>
+
+</header>
+
+<section class="page-title">
+<h1>Order Tracking</h1>
+</section>
+
+<div class="tracking-container">
+
+<div class="order-info">
+
+<h2 id="orderNumber">
+Order Number: FB000000
+</h2>
+
+<p>
+Current Status:
+<strong id="orderStatus">
+Processing
+</strong>
+</p>
+
+</div>
+
+<div class="progress-bar">
+<div class="progress"></div>
+</div>
+
+<div class="timeline">
+
+<div class="step complete">
+<i class="fa-solid fa-circle-check"></i>
+Order Placed
+</div>
+
+<div class="step complete">
+<i class="fa-solid fa-circle-check"></i>
+Payment Confirmed
+</div>
+
+<div class="step current">
+<i class="fa-solid fa-spinner"></i>
+Processing
+</div>
+
+<div class="step pending">
+<i class="fa-regular fa-circle"></i>
+Shipped
+</div>
+
+<div class="step pending">
+<i class="fa-regular fa-circle"></i>
+Delivered
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Fresh Basket Malaysia. All Rights Reserved.
+</footer>
+
+<script>
+
+const orderNumber =
+localStorage.getItem("orderNumber") || "FB000000";
+
+const orderStatus =
+localStorage.getItem("orderStatus") || "Processing";
+
+document.getElementById("orderNumber").innerText =
+"Order Number: " + orderNumber;
+
+document.getElementById("orderStatus").innerText =
+orderStatus;
+
+</script>
+
+</body>
+</html>
